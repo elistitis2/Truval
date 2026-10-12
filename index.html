@@ -3,15 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TruVal - Wujudkan Laporan Valid dan Terpercaya</title>
+<title>TruVal - Wujudkan Laporan Valid dan Terpercaya[cite: 2]</title>
 <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-<!-- AOS (Animate On Scroll) CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <style>
 :root{--truval-dark:#0b1329;--truval-card:#141e38;--truval-accent:#10b981;--truval-accent-hover:#059669;--truval-bg-light:#f8fafc;--truval-text-muted:#94a3b8;--truval-border:#1e293b}
 body {
@@ -28,45 +26,145 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .price, .modal-title {
   letter-spacing: -.01em;
 }
 
+/* ===== ANIMASI SCROLL (FADE UP) ===== */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== NAVBAR & LOGO STYLING ===== */
 .navbar{background-color:var(--truval-dark);border-bottom:1px solid var(--truval-border);padding:16px 0}
-.navbar-brand{color:#fff!important;font-weight:700;letter-spacing:-.5px;cursor:pointer}
-.navbar-brand span{color:var(--truval-accent)}
+.navbar-brand{color:#fff!important;font-weight:700;letter-spacing:-.5px;cursor:pointer; display: flex; align-items: center; gap: 10px;}
+.navbar-brand img{height: 38px; width: auto; border-radius: 8px; transition: transform 0.3s ease;}
+.navbar-brand:hover img{transform: scale(1.05);}
+.navbar-brand span{color:#fff;}
+.navbar-brand span span{color:var(--truval-accent)}
+
 .nav-link{color:var(--truval-text-muted)!important;font-weight:500;font-size:.95rem;cursor:pointer;transition:color .2s;font-family:'Plus Jakarta Sans', sans-serif;}
 .nav-link:hover,.nav-link.active{color:#fff!important}
-.btn-accent{background-color:var(--truval-accent);color:#fff!important;font-weight:600;font-size:.9rem;border-radius:8px;padding:10px 22px;border:none;transition:all .2s ease;font-family:'Plus Jakarta Sans', sans-serif;}
-.btn-accent:hover{background-color:var(--truval-accent-hover);transform:translateY(-1px)}
-.hero{background-color:var(--truval-dark);color:#fff;padding:80px 0;border-bottom:1px solid var(--truval-border)}
-.page-section{display:none}.page-section.active{display:block}
-.card-custom{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:28px;box-shadow:0 4px 15px rgba(0,0,0,.03)}
-.card-dark{background:var(--truval-card);border:1px solid var(--truval-border);color:#fff;border-radius:12px;padding:32px}
-.review-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;height:100%;transition:transform .2s ease,box-shadow .2s ease}
-.review-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.05)}
-.avatar-circle{width:45px;height:45px;border-radius:50%;background-color:var(--truval-dark);color:var(--truval-accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem}
+
+.btn-accent{background-color:var(--truval-accent);color:#fff!important;font-weight:600;font-size:.9rem;border-radius:8px;padding:10px 22px;border:none;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);font-family:'Plus Jakarta Sans', sans-serif;}
+.btn-accent:hover{background-color:var(--truval-accent-hover);transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,185,129,.35)}
+
+/* ===== HERO SECTION DENGAN MESH GRADIENT & POLA ABSTRAK ===== */
+.hero{
+  background-color: var(--truval-dark);
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(16, 185, 129, 0.22) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(5, 150, 105, 0.18) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(20, 30, 56, 0.8) 0px, transparent 100%),
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  color:#fff;
+  padding:90px 0;
+  border-bottom:1px solid var(--truval-border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(0,0,0,0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+.hero .container { position: relative; z-index: 2; }
+
+/* ===== ANIMASI HALAMAN & KARTU INTERAKTIF ===== */
+.page-section{display:none; opacity:0; transition: opacity 0.4s ease-in-out;}
+.page-section.active{display:block; opacity:1;}
+
+.card-custom{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:28px;
+  box-shadow:0 4px 20px rgba(15, 23, 42, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-custom:hover{
+  transform: translateY(-6px);
+  box-shadow:0 16px 32px rgba(15, 23, 42, 0.08);
+  border-color:var(--truval-accent);
+}
+
+.review-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:24px;
+  height:100%;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.review-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 28px rgba(15, 23, 42, 0.07);
+  border-color: #cbd5e1;
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--truval-accent);
+}
+
 .star-rating{color:#f59e0b;font-size:.85rem}
 
-/* ===== Keunggulan & Mengapa TruVal ===== */
-.why-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;height:100%;border-top:3px solid var(--truval-accent)}
-.why-icon{width:48px;height:48px;border-radius:10px;background:#ecfdf5;color:var(--truval-accent-hover);display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:16px}
+/* ===== KEUNGGULAN (WHY-CARD) DENGAN EFEK HOVER DINAMIS ===== */
+.why-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:24px;
+  height:100%;
+  border-top:3px solid var(--truval-accent);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.why-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
+}
+.why-icon{
+  width:48px;height:48px;border-radius:12px;background:#ecfdf5;color:var(--truval-accent-hover);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:16px;
+  transition: transform 0.35s ease;
+}
+.why-card:hover .why-icon{transform: scale(1.1) rotate(6deg);}
 .why-card h6{font-weight:700;margin-bottom:8px;font-family:'Plus Jakarta Sans',sans-serif;}
 .why-card p{color:#64748b;font-size:.9rem;margin:0;line-height:1.6}
 
+/* ===== FOOTER & TOMBOL WA ===== */
 footer{background-color:var(--truval-dark);border-top:1px solid var(--truval-border);color:var(--truval-text-muted);padding:50px 0 25px 0;margin-top:auto;font-size:.9rem}
 footer a{color:var(--truval-text-muted);text-decoration:none;transition:color .2s;cursor:pointer}
 footer a:hover{color:var(--truval-accent)}
 .social-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background-color:var(--truval-card);border:1px solid var(--truval-border);color:#fff;border-radius:8px;margin-right:8px;transition:all .2s ease}
 .social-icon:hover{background-color:var(--truval-accent);color:#fff;border-color:var(--truval-accent)}
-.float-wa{position:fixed;width:50px;height:50px;bottom:25px;right:25px;background-color:var(--truval-accent);color:#fff;border-radius:12px;text-align:center;line-height:50px;font-size:22px;box-shadow:0 6px 20px rgba(16,185,129,.4);z-index:1000;transition:transform .2s}
-.float-wa:hover{transform:scale(1.08);color:#fff}
+
+.float-wa{position:fixed;width:55px;height:55px;bottom:25px;right:25px;background-color:var(--truval-accent);color:#fff;border-radius:14px;text-align:center;line-height:55px;font-size:24px;box-shadow:0 8px 22px rgba(16,185,129,.4);z-index:1000;transition:all 0.3s ease}
+.float-wa:hover{transform:scale(1.12);color:#fff;box-shadow:0 12px 28px rgba(16,185,129,.5)}
 
 .price{font-size:1.6rem;font-weight:700;color:var(--truval-accent-hover);line-height:1.2;font-family:'Plus Jakarta Sans',sans-serif;}
 
 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:28px}
 .chip{border:1px solid #cbd5e1;background:#fff;color:#334155;border-radius:999px;padding:6px 16px;font-size:.85rem;font-weight:500;transition:all .2s;cursor:pointer}
-.chip:hover{border-color:var(--truval-accent)}
+.chip:hover{border-color:var(--truval-accent); transform: translateY(-1px);}
 .chip.active{background:var(--truval-dark);border-color:var(--truval-dark);color:#fff}
 
-.book-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;height:100%;display:flex;flex-direction:column;transition:box-shadow .2s,border-color .2s}
-.book-card:hover{border-color:var(--truval-accent);box-shadow:0 12px 25px rgba(0,0,0,.07)}
+/* ===== STYLING BUKU PORTOFOLIO ===== */
+.book-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;height:100%;display:flex;flex-direction:column;transition:all .35s cubic-bezier(0.16, 1, 0.3, 1)}
+.book-card:hover{border-color:var(--truval-accent);box-shadow:0 16px 30px rgba(15,23,42,.08); transform: translateY(-5px);}
 .book-stage{display:flex;justify-content:center;margin-bottom:18px;perspective:900px}
 .book{position:relative;width:160px;aspect-ratio:3/4;border-radius:3px 10px 10px 3px;color:#fff;padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:6px 8px 18px rgba(15,23,42,.28);transform:rotateY(-14deg);transform-origin:left center;transition:transform .3s ease;overflow:hidden}
 .book::before{content:"";position:absolute;left:0;top:0;bottom:0;width:12px;background:rgba(0,0,0,.28);border-right:1px solid rgba(255,255,255,.18)}
@@ -88,9 +186,12 @@ footer a:hover{color:var(--truval-accent)}
 </head>
 <body>
 
-<!-- NAVIGASI (Tanpa Beranda) -->
+<!-- NAVIGASI DENGAN LOGO GAMBAR -->
 <nav class="navbar navbar-expand-lg sticky-top"><div class="container">
-<a class="navbar-brand fs-4" onclick="switchTab('beranda')">TruVal<span>.</span></a>
+<a class="navbar-brand" onclick="switchTab('beranda')">
+  <img src="variant_b_link_dot.png" alt="Logo TruVal">
+  <span>TruVal<span>.</span></span>
+</a>
 <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
 <div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav ms-auto align-items-center gap-lg-4">
 <li class="nav-item"><a class="nav-link" id="nav-tentang" onclick="switchTab('tentang')">Layanan Kami</a></li>
@@ -100,34 +201,34 @@ footer a:hover{color:var(--truval-accent)}
 
 <!-- MENU 1: BERANDA / LANDING PAGE -->
 <div id="page-beranda" class="page-section active">
-<!-- HERO SECTION -->
+<!-- HERO SECTION DENGAN MESH GRADIENT & TEXTUR ABSTRAK -->
 <section class="hero"><div class="container"><div class="row align-items-center g-5">
-<div class="col-lg-7">
-<span class="badge mb-3 px-3 py-2 font-monospace" style="background:rgba(16,185,129,.1);color:var(--truval-accent);border:1px solid rgba(16,185,129,.2)">Solusi Finansial & Laporan Terstruktur</span>
+<div class="col-lg-7 scroll-animate">
+<span class="badge mb-3 px-3 py-2 font-monospace" style="background:rgba(16,185,129,.15);color:var(--truval-accent);border:1px solid rgba(16,185,129,.3)">Solusi Finansial & Laporan Terstruktur</span>
 <h1 class="fw-bold mb-3 display-5">Wujudkan Laporan Valid dan Terpercaya</h1>
 <p class="mb-4 fs-6 text-light opacity-75" style="line-height:1.7;">Laporan keuangan sering tidak balance atau berantakan? TruVal hadir memberikan solusi akurat untuk integritas data Anda. Presisi di setiap angka, rapi di setiap lembar.</p>
 <button onclick="switchTab('tentang')" class="btn btn-accent me-2">Lihat Paket & Layanan</button>
 </div>
-<div class="col-lg-5 text-center"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80" alt="Professional Financial Analysis" class="img-fluid rounded-4 shadow-lg border border-secondary"></div>
+<div class="col-lg-5 text-center scroll-animate"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80" alt="Professional Financial Analysis" class="img-fluid rounded-4 shadow-lg border border-secondary"></div>
 </div></div></section>
 
 <!-- 4 VALUE / MENGAPA TRUVAL DI DEPAN -->
 <section class="py-5 bg-white border-bottom"><div class="container">
-<div class="text-center mb-4">
+<div class="text-center mb-4 scroll-animate">
 <h3 class="fw-bold">Mengapa Kepercayaan Anda Jatuh pada TruVal?</h3>
 <p class="text-muted mx-auto" style="max-width:560px">Standar ketelitian tinggi untuk memastikan data finansial Anda valid tanpa celah kesalahan.</p>
 </div>
 <div class="row g-4 mb-3">
-<div class="col-md-6 col-lg-3"><div class="why-card"><div class="why-icon"><i class="bi bi-shield-check"></i></div><h6>Presisi Tanpa Kompromi</h6><p>Setiap selisih angka ditelusuri tuntas hingga buku besar menggunakan formula otomatis.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="why-card"><div class="why-icon"><i class="bi bi-star-fill text-warning"></i></div><h6>Reputasi Bintang Lima</h6><p>Diandalkan oleh pelaku UMKM, korporasi, hingga mahasiswa tingkat akhir.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="why-card"><div class="why-icon"><i class="bi bi-chat-heart"></i></div><h6>Konsultasi Tanpa Biaya</h6><p>Diskusikan kendala laporan Anda secara gratis sebelum memutuskan pengerjaan.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="why-card"><div class="why-icon"><i class="bi bi-clock-history"></i></div><h6>Garansi Tepat Waktu</h6><p>Komitmen penyelesaian super cepat sesuai tenggat waktu yang Anda harapkan.</p></div></div>
+<div class="col-md-6 col-lg-3 scroll-animate"><div class="why-card"><div class="why-icon"><i class="bi bi-shield-check"></i></div><h6>Presisi Tanpa Kompromi</h6><p>Setiap selisih angka ditelusuri tuntas hingga buku besar menggunakan formula otomatis.</p></div></div>
+<div class="col-md-6 col-lg-3 scroll-animate"><div class="why-card"><div class="why-icon"><i class="bi bi-star-fill text-warning"></i></div><h6>Reputasi Bintang Lima</h6><p>Diandalkan oleh pelaku UMKM, korporasi, hingga mahasiswa tingkat akhir.</p></div></div>
+<div class="col-md-6 col-lg-3 scroll-animate"><div class="why-card"><div class="why-icon"><i class="bi bi-chat-heart"></i></div><h6>Konsultasi Tanpa Biaya</h6><p>Diskusikan kendala laporan Anda secara gratis sebelum memutuskan pengerjaan.</p></div></div>
+<div class="col-md-6 col-lg-3 scroll-animate"><div class="why-card"><div class="why-icon"><i class="bi bi-clock-history"></i></div><h6>Garansi Tepat Waktu</h6><p>Komitmen penyelesaian super cepat sesuai tenggat waktu yang Anda harapkan.</p></div></div>
 </div>
 </div></section>
 
 <!-- SECTION DESKRIPSI APLIKASI MOBILE & TOMBOL WA -->
 <section class="py-5"><div class="container">
-<div class="card-custom bg-light border-0 py-5">
+<div class="card-custom bg-light border-0 py-5 scroll-animate">
 <div class="row align-items-center g-4">
 <div class="col-lg-6 text-center">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="TruVal Mobile App Preview" class="img-fluid rounded-4 shadow-sm border" style="max-height: 350px;">
@@ -144,34 +245,151 @@ footer a:hover{color:var(--truval-accent)}
 </div>
 </div></section>
 
-<!-- ULASAN & TESTIMONI BERGESER (9 Dibagi jadi 3 bagian / 3 Slide Carousel) -->
+<!-- ULASAN & TESTIMONI BERGESER -->
 <section class="py-5 bg-white border-top"><div class="container">
-<div class="text-center mb-5"><h2 class="fw-bold">Ulasan & Testimoni Pelanggan</h2><p class="text-muted mx-auto" style="max-width:560px">Pengalaman nyata dari sesi konsultasi hingga layanan penuh laporan.</p></div>
+<div class="text-center mb-5 scroll-animate"><h2 class="fw-bold">Ulasan & Testimoni Pelanggan</h2><p class="text-muted mx-auto" style="max-width:560px">Pengalaman nyata dari sesi konsultasi hingga layanan penuh laporan.</p></div>
 
-<div id="landingCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+<div id="landingCarousel" class="carousel slide scroll-animate" data-bs-ride="carousel" data-bs-interval="4000">
   <div class="carousel-inner">
-    <!-- Slide 1 (3 Review) -->
+    <!-- Slide 1 -->
     <div class="carousel-item active">
       <div class="row g-4">
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">RF</div><div><h6 class="fw-bold mb-0 text-dark small">R. Firmansyah, S.E.</h6><span class="text-muted" style="font-size:.7rem">Finance Supervisor</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Sangat membantu untuk perapihan Laporan Keuangan Tahunan. Korelasi angka antara Laba Rugi dan Neraca diperiksa sangat teliti."</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">NP</div><div><h6 class="fw-bold mb-0 text-dark small">Nadia Putri</h6><span class="text-muted" style="font-size:.7rem">Laporan Akademik</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Format tabel dan penulisan Catatan atas Laporan Keuangan (CaLK) langsung rapi. Respon pengerjaan cepat!"</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">AH</div><div><h6 class="fw-bold mb-0 text-dark small">Ahmad Hidayat</h6><span class="text-muted" style="font-size:.7rem">Owner UMKM Kuliner</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Awalnya pusing neraca usaha selalu gak balance. Setelah direview TruVal, semua formula dihubungkan otomatis."</p></div></div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="R. Firmansyah" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">R. Firmansyah, S.E.</h6><span class="text-muted" style="font-size:.7rem">Finance Supervisor</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Sangat membantu untuk perapihan Laporan Keuangan Tahunan. Korelasi angka antara Laba Rugi dan Neraca diperiksa sangat teliti."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Nadia Putri" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Nadia Putri</h6><span class="text-muted" style="font-size:.7rem">Laporan Akademik</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Format tabel dan penulisan Catatan atas Laporan Keuangan (CaLK) langsung rapi. Respon pengerjaan cepat!"</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Ahmad Hidayat" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Ahmad Hidayat</h6><span class="text-muted" style="font-size:.7rem">Owner UMKM Kuliner</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Awalnya pusing neraca usaha selalu gak balance. Setelah direview TruVal, semua formula dihubungkan otomatis."</p>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Slide 2 (3 Review) -->
+    <!-- Slide 2 -->
     <div class="carousel-item">
       <div class="row g-4">
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">DS</div><div><h6 class="fw-bold mb-0 text-dark small">Dewi Sartika</h6><span class="text-muted" style="font-size:.7rem">Bendahara Koperasi</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Selisih simpanan anggota yang sudah lama kami cari akhirnya ketemu. Laporan jadi jelas sebelum RAT."</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">BK</div><div><h6 class="fw-bold mb-0 text-dark small">Bima Kusuma</h6><span class="text-muted" style="font-size:.7rem">Mahasiswa Akuntansi</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Rasio keuangan di tugas akhir saya ternyata salah rujuk sel. Setelah dibenahi, tabelnya rapi."</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">SW</div><div><h6 class="fw-bold mb-0 text-dark small">Sinta Wulandari</h6><span class="text-muted" style="font-size:.7rem">Toko Kelontong</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Laba rugi bulanan sekarang konsisten dan HPP-nya jelas. Bisa lihat margin tiap bulan tanpa hitung manual."</p></div></div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Dewi Sartika" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Dewi Sartika</h6><span class="text-muted" style="font-size:.7rem">Bendahara Koperasi</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Selisih simpanan anggota yang sudah lama kami cari akhirnya ketemu. Laporan jadi jelas sebelum RAT."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Bima Kusuma" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Bima Kusuma</h6><span class="text-muted" style="font-size:.7rem">Mahasiswa Akuntansi</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Rasio keuangan di tugas akhir saya ternyata salah rujuk sel. Setelah dibenahi, tabelnya rapi."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Sinta Wulandari" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Sinta Wulandari</h6><span class="text-muted" style="font-size:.7rem">Toko Kelontong</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Laba rugi bulanan sekarang konsisten dan HPP-nya jelas. Bisa lihat margin tiap bulan tanpa hitung manual."</p>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Slide 3 (3 Review) -->
+    <!-- Slide 3 -->
     <div class="carousel-item">
       <div class="row g-4">
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">DR</div><div><h6 class="fw-bold mb-0 text-dark small">Dian Rahma</h6><span class="text-muted" style="font-size:.7rem">Konsultasi Bisnis</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Sesi konsultasi gratisnya sangat mencerahkan. Diberikan arahan detail bagaimana menyusun arus kas."</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">RL</div><div><h6 class="fw-bold mb-0 text-dark small">Rian Lesmana</h6><span class="text-muted" style="font-size:.7rem">Manajer Operasional</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"Pengerjaan laporan sangat profesional dan memuaskan. Sangat membantu perusahaan kami."</p></div></div>
-        <div class="col-md-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">TF</div><div><h6 class="fw-bold mb-0 text-dark small">Tika Fadhila</h6><span class="text-muted" style="font-size:.7rem">Mahasiswa S1</span></div></div></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0">"File perbaikan langsung bisa diunduh dari portofolio detailnya, sangat membantu referensi tugas saya."</p></div></div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" alt="Dian Rahma" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Dian Rahma</h6><span class="text-muted" style="font-size:.7rem">Konsultasi Bisnis</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Sesi konsultasi gratisnya sangat mencerahkan. Diberikan arahan detail bagaimana menyusun arus kas."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Rian Lesmana" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Rian Lesmana</h6><span class="text-muted" style="font-size:.7rem">Manajer Operasional</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="text-secondary small mb-0">"Pengerjaan laporan sangat profesional dan memuaskan. Sangat membantu perusahaan kami."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Tika Fadhila" class="review-avatar">
+                <div><h6 class="fw-bold mb-0 text-dark small">Tika Fadhila</h6><span class="text-muted" style="font-size:.7rem">Mahasiswa S1</span></div>
+              </div>
+            </div>
+            <div class="star-rating mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+            </div>
+            <p class="text-secondary small mb-0">"File perbaikan langsung bisa diunduh dari portofolio detailnya, sangat membantu referensi tugas saya."</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -186,63 +404,66 @@ footer a:hover{color:var(--truval-accent)}
 </div></section>
 </div>
 
-<!-- MENU 2: LAYANAN KAMI-->
+<!-- MENU 2: LAYANAN KAMI / TENTANG KAMI -->
 <div id="page-tentang" class="page-section">
 <section class="py-5 bg-white border-bottom"><div class="container">
-<!-- JUDUL UTAMA -->
-<div class="text-center mx-auto mb-5" style="max-width: 750px;">
+<!-- JUDUL UTAMA & MITRA -->
+<div class="text-center mx-auto mb-4 scroll-animate" style="max-width: 750px;">
 <span class="badge bg-success bg-opacity-10 text-success mb-2 px-3 py-1 font-monospace">Solusi Profesional</span>
-<h2 class="fw-bold display-6 mb-3">Tentang Truval</h2>
+<h2 class="fw-bold display-6 mb-2">Tentang Truval</h2>
+<span class="text-success fw-semibold font-monospace d-block">MITRA TERPERCAYA PENGELOLAAN LAPORAN</span>
 </div>
 
-<!-- SECTION GAMBAR & PENJELASAN SINGKAT -->
-<div class="row align-items-center g-5 mb-5">
-<div class="col-lg-6">
-<img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=700&q=80" alt="Financial Verification & Report" class="img-fluid rounded-4 shadow-sm border">
+<!-- ELEMEN VISUAL UTAMA: KOTAK STATISTIK DIPERBESAR & DIPERCANTIK DI TENGAH -->
+<div class="row justify-content-center g-4 mb-5 scroll-animate">
+<div class="col-md-4 col-sm-6">
+<div class="p-4 border rounded-4 bg-light text-center shadow-sm border-success border-opacity-25">
+<div class="display-5 fw-bold text-success mb-1">99%</div>
+<p class="small text-muted mb-0 fw-bold">Akurasi & Keseimbangan Neraca</p>
 </div>
-<div class="col-lg-6">
-<span class="text-success fw-semibold font-monospace small">MITRA TERPERCAYA PENGELOLAAN LAPORAN</span>
-<h3 class="fw-bold mb-3 mt-1">Presisi di Setiap Angka, Rapi di Setiap Lembar</h3>
+</div>
+<div class="col-md-4 col-sm-6">
+<div class="p-4 border rounded-4 bg-light text-center shadow-sm border-success border-opacity-25">
+<div class="display-5 fw-bold text-dark mb-1">20+</div>
+<p class="small text-muted mb-0 fw-bold">Portofolio Kasus Selesai</p>
+</div>
+</div>
+<div class="col-md-4 col-sm-6">
+<div class="p-4 border rounded-4 bg-light text-center shadow-sm border-success border-opacity-25">
+<div class="display-5 fw-bold text-warning mb-1">4.5 <i class="bi bi-star-fill fs-4"></i></div>
+<p class="small text-muted mb-0 fw-bold">Rating Kepuasan Klien</p>
+</div>
+</div>
+</div>
+
+<!-- PENJELASAN SINGKAT -->
+<div class="row justify-content-center mb-5 scroll-animate">
+<div class="col-lg-8 text-center">
+<h3 class="fw-bold mb-3">Presisi di Setiap Angka, Rapi di Setiap Lembar</h3>
 <p class="text-muted" style="line-height: 1.8;">TruVal hadir untuk menyelesaikan keresahan Anda dalam menyusun laporan keuangan dan akademik yang presisi. Kami berfokus pada pemeriksaan, perapihan format, rekonsiliasi angka, hingga penyusunan standar laporan yang siap diuji dan bebas dari kesalahan.</p>
 </div>
 </div>
 
-<!-- STATISTIK / PENCAPAIAN -->
-<div class="row justify-content-center g-4 mb-5">
-<div class="col-md-4 col-sm-6">
-<div class="p-4 border rounded-4 bg-light text-center shadow-sm">
-<div class="display-6 fw-bold text-success mb-1">99%</div>
-<p class="small text-muted mb-0 fw-semibold">Akurasi & Keseimbangan Neraca</p>
-</div>
-</div>
-<div class="col-md-4 col-sm-6">
-<div class="p-4 border rounded-4 bg-light text-center shadow-sm">
-<div class="display-6 fw-bold text-warning mb-1">4.9 <i class="bi bi-star-fill fs-4"></i></div>
-<p class="small text-muted mb-0 fw-semibold">Rating Kepuasan Klien</p>
-</div>
-</div>
-</div>
-
-<div class="text-center mb-5 mt-5"><h3 class="fw-bold">Pilih Paket Penanganan Laporan</h3><p class="text-muted">Sesuaikan dengan kebutuhan perbaikan dokumen dan laporan Anda</p></div>
+<div class="text-center mb-5 mt-5 scroll-animate"><h3 class="fw-bold">Pilih Paket Penanganan Laporan</h3><p class="text-muted">Sesuaikan dengan kebutuhan perbaikan dokumen dan laporan Anda</p></div>
 <div class="row g-4 mb-5">
-<div class="col-md-4"><div class="card-custom h-100"><h6 class="fw-bold text-uppercase text-muted small">Paket A</h6><h4 class="fw-bold mb-2">Format & Layout</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 50.000</div></div><p class="text-muted small">Penataan estetika, struktur tabel keuangan, dan penyelarasan standar visual laporan.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Penataan Neraca & Laba Rugi</li><li>Format Satuan Mata Uang & Desimal</li><li>Penyelarasan Font & Layout PDF</li></ul></div></div>
-<div class="col-md-4"><div class="card-custom h-100"><h6 class="fw-bold text-uppercase text-muted small">Paket B</h6><h4 class="fw-bold mb-2">Verifikasi & Aritmatika</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 100.000</div></div><p class="text-muted small">Validasi formula, pengecekan korelasi angka, dan keseimbangan neraca.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Pengecekan Neraca Balance</li><li>Validasi Formula Excel/Spreadsheet</li><li>Korelasi Laba Rugi ke Ekuitas</li></ul></div></div>
-<div class="col-md-4"><div class="card-custom h-100 border-success"><h6 class="fw-bold text-uppercase text-success small">Paket C (Terfavorit)</h6><h4 class="fw-bold mb-2">Full Review Laporan</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 200.000</div></div><p class="text-muted small">Pemeriksaan menyeluruh mencakup layout, verifikasi angka, hingga penyusunan CaLK.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Seluruh Fitur Paket A & B</li><li>Rekonsiliasi Arus Kas & Buku Besar</li><li>Drafting Catatan atas Laporan Keuangan</li></ul></div></div>
+<div class="col-md-4 scroll-animate"><div class="card-custom h-100"><h6 class="fw-bold text-uppercase text-muted small">Paket A</h6><h4 class="fw-bold mb-2">Format & Layout</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 50.000</div></div><p class="text-muted small">Penataan estetika, struktur tabel keuangan, dan penyelarasan standar visual laporan.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Penataan Neraca & Laba Rugi</li><li>Format Satuan Mata Uang & Desimal</li><li>Penyelarasan Font & Layout PDF</li></ul></div></div>
+<div class="col-md-4 scroll-animate"><div class="card-custom h-100"><h6 class="fw-bold text-uppercase text-muted small">Paket B</h6><h4 class="fw-bold mb-2">Verifikasi & Aritmatika</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 100.000</div></div><p class="text-muted small">Validasi formula, pengecekan korelasi angka, dan keseimbangan neraca.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Pengecekan Neraca Balance</li><li>Validasi Formula Excel/Spreadsheet</li><li>Korelasi Laba Rugi ke Ekuitas</li></ul></div></div>
+<div class="col-md-4 scroll-animate"><div class="card-custom h-100 border-success"><h6 class="fw-bold text-uppercase text-success small">Paket C (Terfavorit)</h6><h4 class="fw-bold mb-2">Full Review Laporan</h4><div class="mb-3"><span class="text-muted small">mulai dari</span><div class="price">Rp 200.000</div></div><p class="text-muted small">Pemeriksaan menyeluruh mencakup layout, verifikasi angka, hingga penyusunan CaLK.</p><hr><p class="fw-bold small mb-1">Cakupan kerja:</p><ul class="text-muted small ps-3"><li>Seluruh Fitur Paket A & B</li><li>Rekonsiliasi Arus Kas & Buku Besar</li><li>Drafting Catatan atas Laporan Keuangan</li></ul></div></div>
 </div>
 
 </div></section>
 </div>
 
-<!-- MENU 3: PORTOFOLIO -->
+<!-- MENU 3: PORTOFOLIO (20 CONTOH LAPORAN) -->
 <div id="page-portofolio" class="page-section">
 <section class="py-5"><div class="container">
-<div class="text-center mb-5">
+<div class="text-center mb-5 scroll-animate">
 <span class="badge bg-light text-dark border mb-2 px-3 py-1 font-monospace">Rekam Jejak Profesional</span>
-<h2 class="fw-bold">Portofolio Pengerjaan laporan</h2>
-<p class="text-muted mx-auto" style="max-width:640px">Berikut adalah contoh proyek audit, perapihan, dan penyusunan laporan keuangan yang sukses diselesaikan oleh tim TruVal.</p>
+<h2 class="fw-bold">Portofolio Pengerjaan Laporan (20 Contoh Kasus)</h2>
+<p class="text-muted mx-auto" style="max-width:640px">Berikut adalah 20 contoh proyek audit, perapihan, dan penyusunan laporan keuangan yang sukses diselesaikan oleh tim TruVal.</p>
 </div>
-<div class="chips">
-<button class="chip active" data-cat="all">Semua</button>
+<div class="chips scroll-animate">
+<button class="chip active" data-cat="all">Semua (20)</button>
 <button class="chip" data-cat="UMKM">UMKM & Retail</button>
 <button class="chip" data-cat="Akademik">Studi Akademik</button>
 <button class="chip" data-cat="Jasa">Perusahaan Jasa</button>
@@ -251,66 +472,66 @@ footer a:hover{color:var(--truval-accent)}
 
 <div class="row g-4" id="bookGrid">
 <!-- Item 1 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0b1329,#1e3a5f)"><div><div class="b-top">Laporan</div><div class="b-title">UD Sumber Rejeki</div><div class="b-line"></div></div><div class="b-id">#TRV-01</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Rekonsiliasi Neraca & Ekuitas</h6><p>Selisih Neraca Rp 18,5 juta ditelusuri dan diseimbangkan lewat formula terhubung.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 24 Jam</span><small class="text-muted">32 Tabel</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0b1329,#1e3a5f)"><div><div class="b-top">Laporan</div><div class="b-title">UD Sumber Rejeki</div><div class="b-line"></div></div><div class="b-id">#TRV-01</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Rekonsiliasi Neraca & Ekuitas</h6><p>Selisih Neraca Rp 18,5 juta ditelusuri dan diseimbangkan lewat formula terhubung.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 24 Jam</span><small class="text-muted">32 Tabel</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
 <!-- Item 2 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#064e3b,#0f766e)"><div><div class="b-top">Laporan</div><div class="b-title">PT Karya Mandiri</div><div class="b-line"></div></div><div class="b-id">#TRV-02</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Standarisasi Format & CaLK</h6><p>Tabel dirapikan dan Catatan atas Laporan Keuangan disusun siap cetak.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 12 Jam</span><small class="text-muted">15 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#064e3b,#0f766e)"><div><div class="b-top">Laporan</div><div class="b-title">PT Karya Mandiri</div><div class="b-line"></div></div><div class="b-id">#TRV-02</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Standarisasi Format & CaLK</h6><p>Tabel dirapikan dan Catatan atas Laporan Keuangan disusun siap cetak.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 12 Jam</span><small class="text-muted">15 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
 <!-- Item 3 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#3b0d1e,#7f1d3a)"><div><div class="b-top">Laporan</div><div class="b-title">CV Jasa Nusantara</div><div class="b-line"></div></div><div class="b-id">#TRV-03</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Arus Kas Langsung & Tidak Langsung</h6><p>Saldo kas akhir pada arus kas dan Neraca disinkronkan dari Jurnal Umum.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 18 Jam</span><small class="text-muted">450 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#3b0d1e,#7f1d3a)"><div><div class="b-top">Laporan</div><div class="b-title">CV Jasa Nusantara</div><div class="b-line"></div></div><div class="b-id">#TRV-03</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Arus Kas Langsung & Tidak Langsung</h6><p>Saldo kas akhir pada arus kas dan Neraca disinkronkan dari Jurnal Umum.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 18 Jam</span><small class="text-muted">450 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
 <!-- Item 4 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#475569)"><div><div class="b-top">Laporan</div><div class="b-title">Warung Bu Rini</div><div class="b-line"></div></div><div class="b-id">#TRV-04</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Laba Rugi & HPP Kuliner</h6><p>HPP dihitung dari persediaan dan Laba Rugi 12 bulan dibuat konsisten.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 16 Jam</span><small class="text-muted">12 Bulan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#475569)"><div><div class="b-top">Laporan</div><div class="b-title">Warung Bu Rini</div><div class="b-line"></div></div><div class="b-id">#TRV-04</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Laba Rugi & HPP Kuliner</h6><p>HPP dihitung dari persediaan dan Laba Rugi 12 bulan dibuat konsisten.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 16 Jam</span><small class="text-muted">12 Bulan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
 <!-- Item 5 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e1b4b,#3730a3)"><div><div class="b-top">Laporan</div><div class="b-title">Tugas Akhir Keuangan</div><div class="b-line"></div></div><div class="b-id">#TRV-05</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Analisis Rasio Keuangan</h6><p>Rumus rasio likuiditas dan profitabilitas diperbaiki dan disajikan rapi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 8 Jam</span><small class="text-muted">8 Rasio Utama</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e1b4b,#3730a3)"><div><div class="b-top">Laporan</div><div class="b-title">Tugas Akhir Keuangan</div><div class="b-line"></div></div><div class="b-id">#TRV-05</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Analisis Rasio Keuangan</h6><p>Rumus rasio likuiditas dan profitabilitas diperbaiki dan disajikan rapi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 8 Jam</span><small class="text-muted">8 Rasio Utama</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
 <!-- Item 6 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#422006,#92400e)"><div><div class="b-top">Laporan</div><div class="b-title">Kospin Sejahtera</div><div class="b-line"></div></div><div class="b-id">#TRV-06</div></div></div><span class="tool-badge">Koperasi</span><h6>Laporan Simpan Pinjam & SHU</h6><p>Simpanan anggota dicocokkan dengan Neraca sebelum SHU dihitung.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 30 Jam</span><small class="text-muted">120 Anggota</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#422006,#92400e)"><div><div class="b-top">Laporan</div><div class="b-title">Kospin Sejahtera</div><div class="b-line"></div></div><div class="b-id">#TRV-06</div></div></div><span class="tool-badge">Koperasi</span><h6>Laporan Simpan Pinjam & SHU</h6><p>Simpanan anggota dicocokkan dengan Neraca sebelum SHU dihitung.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 30 Jam</span><small class="text-muted">120 Anggota</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
 <!-- Item 7 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0f172a,#334155)"><div><div class="b-top">Laporan</div><div class="b-title">Toko Elektronik Jaya</div><div class="b-line"></div></div><div class="b-id">#TRV-07</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Audit Stok & Pencatatan Piutang</h6><p>Pencatatan piutang macet dan stok opname diselaraskan dengan buku besar.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 20 Jam</span><small class="text-muted">50 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0f172a,#334155)"><div><div class="b-top">Laporan</div><div class="b-title">Toko Elektronik Jaya</div><div class="b-line"></div></div><div class="b-id">#TRV-07</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Audit Stok & Pencatatan Piutang</h6><p>Pencatatan piutang macet dan stok opname diselaraskan dengan buku besar.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 20 Jam</span><small class="text-muted">50 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
 <!-- Item 8 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#065f46,#047857)"><div><div class="b-top">Laporan</div><div class="b-title">CV Media Kreatif</div><div class="b-line"></div></div><div class="b-id">#TRV-08</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Rekonsiliasi Pendapatan Proyek</h6><p>Penyesuaian pengakuan pendapatan berbasis persentase penyelesaian.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 15 Jam</span><small class="text-muted">18 Proyek</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#065f46,#047857)"><div><div class="b-top">Laporan</div><div class="b-title">CV Media Kreatif</div><div class="b-line"></div></div><div class="b-id">#TRV-08</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Rekonsiliasi Pendapatan Proyek</h6><p>Penyesuaian pengakuan pendapatan berbasis persentase penyelesaian.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 15 Jam</span><small class="text-muted">18 Proyek</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
 <!-- Item 9 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#581c87,#6b21a8)"><div><div class="b-top">Laporan</div><div class="b-title">Makalah Akuntansi Biaya</div><div class="b-line"></div></div><div class="b-id">#TRV-09</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Perhitungan Harga Pokok Produksi</h6><p>Koreksi alokasi biaya overhead pabrik pada laporan laba rugi simulasi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 10 Jam</span><small class="text-muted">10 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#581c87,#6b21a8)"><div><div class="b-top">Laporan</div><div class="b-title">Makalah Akuntansi Biaya</div><div class="b-line"></div></div><div class="b-id">#TRV-09</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Perhitungan Harga Pokok Produksi</h6><p>Koreksi alokasi biaya overhead pabrik pada laporan laba rugi simulasi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 10 Jam</span><small class="text-muted">10 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
 <!-- Item 10 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#9a3412,#c2410c)"><div><div class="b-top">Laporan</div><div class="b-title">Bakery Manis Legit</div><div class="b-line"></div></div><div class="b-id">#TRV-10</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Manajemen Kas Kecil & Harian</h6><p>Penyusunan ulang buku kas harian ke dalam format spreadsheet terpadu.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 14 Jam</span><small class="text-muted">300 Catatan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#9a3412,#c2410c)"><div><div class="b-top">Laporan</div><div class="b-title">Bakery Manis Legit</div><div class="b-line"></div></div><div class="b-id">#TRV-10</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Manajemen Kas Kecil & Harian</h6><p>Penyusunan ulang buku kas harian ke dalam format spreadsheet terpadu.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 14 Jam</span><small class="text-muted">300 Catatan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
 <!-- Item 11 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#134e4a,#115e59)"><div><div class="b-top">Laporan</div><div class="b-title">KUD Tani Makmur</div><div class="b-line"></div></div><div class="b-id">#TRV-11</div></div></div><span class="tool-badge">Koperasi</span><h6>Audit Laporan RAT Koperasi</h6><p>Penyusunan laporan tahunan unit usaha pertanian dan pertokoan desa.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 35 Jam</span><small class="text-muted">4 Unit Usaha</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#134e4a,#115e59)"><div><div class="b-top">Laporan</div><div class="b-title">KUD Tani Makmur</div><div class="b-line"></div></div><div class="b-id">#TRV-11</div></div></div><span class="tool-badge">Koperasi</span><h6>Audit Laporan RAT Koperasi</h6><p>Penyusunan laporan tahunan unit usaha pertanian dan pertokoan desa.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 35 Jam</span><small class="text-muted">4 Unit Usaha</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
 <!-- Item 12 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#831843,#9d174d)"><div><div class="b-top">Laporan</div><div class="b-title">PT Logistik Express</div><div class="b-line"></div></div><div class="b-id">#TRV-12</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Rekonsiliasi Biaya Operasional</h6><p>Pengelompokan ulang biaya armada dan pemeliharaan kendaraan.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 22 Jam</span><small class="text-muted">25 Kendaraan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#831843,#9d174d)"><div><div class="b-top">Laporan</div><div class="b-title">PT Logistik Express</div><div class="b-line"></div></div><div class="b-id">#TRV-12</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Rekonsiliasi Biaya Operasional</h6><p>Pengelompokan ulang biaya armada dan pemeliharaan kendaraan.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 22 Jam</span><small class="text-muted">25 Kendaraan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
 <!-- Item 13 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#312e81,#3730a3)"><div><div class="b-top">Laporan</div><div class="b-title">Praktikum Auditing</div><div class="b-line"></div></div><div class="b-id">#TRV-13</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Kertas Kerja Pemeriksaan (KKP)</h6><p>Penyusunan kertas kerja audit piutang usaha sesuai standar akademik.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 12 Jam</span><small class="text-muted">14 Halaman</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#312e81,#3730a3)"><div><div class="b-top">Laporan</div><div class="b-title">Praktikum Auditing</div><div class="b-line"></div></div><div class="b-id">#TRV-13</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Kertas Kerja Pemeriksaan (KKP)</h6><p>Penyusunan kertas kerja audit piutang usaha sesuai standar akademik.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 12 Jam</span><small class="text-muted">14 Halaman</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
 <!-- Item 14 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#0f172a)"><div><div class="b-top">Laporan</div><div class="b-title">Laundry Bersih Wangi</div><div class="b-line"></div></div><div class="b-id">#TRV-14</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Laporan Arus Kas Mikro Laundry</h6><p>Pemisahan aset pribadi pemilik dengan kas operasional outlet.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 10 Jam</span><small class="text-muted">6 Bulan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#0f172a)"><div><div class="b-top">Laporan</div><div class="b-title">Laundry Bersih Wangi</div><div class="b-line"></div></div><div class="b-id">#TRV-14</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Laporan Arus Kas Mikro Laundry</h6><p>Pemisahan aset pribadi pemilik dengan kas operasional outlet.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 10 Jam</span><small class="text-muted">6 Bulan</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
 <!-- Item 15 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#78350f,#92400e)"><div><div class="b-top">Laporan</div><div class="b-title">Klinik Pratama Sehat</div><div class="b-line"></div></div><div class="b-id">#TRV-15</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Laporan Keuangan Medis</h6><p>Pemeriksaan pendapatan jasa medis dan persediaan obat farmasi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 28 Jam</span><small class="text-muted">800 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#78350f,#92400e)"><div><div class="b-top">Laporan</div><div class="b-title">Klinik Pratama Sehat</div><div class="b-line"></div></div><div class="b-id">#TRV-15</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Laporan Keuangan Medis</h6><p>Pemeriksaan pendapatan jasa medis dan persediaan obat farmasi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 28 Jam</span><small class="text-muted">800 Transaksi</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-03">Lihat Detail</button></div></div>
 <!-- Item 16 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#14532d,#166534)"><div><div class="b-top">Laporan</div><div class="b-title">Studi Kasus Perbankan</div><div class="b-line"></div></div><div class="b-id">#TRV-16</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Analisis Kesehatan Bank (CAMELS)</h6><p>Perhitungan rasio permodalan, kualitas aset, dan rentabilitas.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 16 Jam</span><small class="text-muted">20 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#14532d,#166534)"><div><div class="b-top">Laporan</div><div class="b-title">Studi Kasus Perbankan</div><div class="b-line"></div></div><div class="b-id">#TRV-16</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Analisis Kesehatan Bank (CAMELS)</h6><p>Perhitungan rasio permodalan, kualitas aset, dan rentabilitas.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 16 Jam</span><small class="text-muted">20 Lembar</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-04">Lihat Detail</button></div></div>
 <!-- Item 17 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#4a044e,#701a75)"><div><div class="b-top">Laporan</div><div class="b-title">Fashion Butik Kirana</div><div class="b-line"></div></div><div class="b-id">#TRV-17</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Valuasi Persediaan Barang Dagang</h6><p>Pencatatan metode FIFO untuk persediaan pakaian dan aksesoris.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 15 Jam</span><small class="text-muted">150 SKU</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="UMKM"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#4a044e,#701a75)"><div><div class="b-top">Laporan</div><div class="b-title">Fashion Butik Kirana</div><div class="b-line"></div></div><div class="b-id">#TRV-17</div></div></div><span class="tool-badge">UMKM / Retail</span><h6>Valuasi Persediaan Barang Dagang</h6><p>Pencatatan metode FIFO untuk persediaan pakaian dan aksesoris.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 15 Jam</span><small class="text-muted">150 SKU</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-05">Lihat Detail</button></div></div>
 <!-- Item 18 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0f766e,#0d9488)"><div><div class="b-top">Laporan</div><div class="b-title">Koperasi Karyawan Bina Sejahtera</div><div class="b-line"></div></div><div class="b-id">#TRV-18</div></div></div><span class="tool-badge">Koperasi</span><h6>Rekonsiliasi Piutang Anggota</h6><p>Pencocokan pemotongan gaji anggota dengan daftar cicilan pinjaman.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 24 Jam</span><small class="text-muted">95 Anggota</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Koperasi"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#0f766e,#0d9488)"><div><div class="b-top">Laporan</div><div class="b-title">Koperasi Karyawan Bina Sejahtera</div><div class="b-line"></div></div><div class="b-id">#TRV-18</div></div></div><span class="tool-badge">Koperasi</span><h6>Rekonsiliasi Piutang Anggota</h6><p>Pencocokan pemotongan gaji anggota dengan daftar cicilan pinjaman.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 24 Jam</span><small class="text-muted">95 Anggota</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-06">Lihat Detail</button></div></div>
 <!-- Item 19 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#334155)"><div><div class="b-top">Laporan</div><div class="b-title">CV Properti Mandiri</div><div class="b-line"></div></div><div class="b-id">#TRV-19</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Laporan Proyek Konstruksi Tahap I</h6><p>Penyusunan laporan biaya pembangunan dan uang muka pelanggan.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 30 Jam</span><small class="text-muted">12 Sub-kontraktor</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Jasa"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#1e293b,#334155)"><div><div class="b-top">Laporan</div><div class="b-title">CV Properti Mandiri</div><div class="b-line"></div></div><div class="b-id">#TRV-19</div></div></div><span class="tool-badge">Perusahaan Jasa</span><h6>Laporan Proyek Konstruksi Tahap I</h6><p>Penyusunan laporan biaya pembangunan dan uang muka pelanggan.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 30 Jam</span><small class="text-muted">12 Sub-kontraktor</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-01">Lihat Detail</button></div></div>
 <!-- Item 20 -->
-<div class="col-md-6 col-lg-4 book-item" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#3b82f6,#1d4ed8)"><div><div class="b-top">Laporan</div><div class="b-title">Skripsi Analisis Fundamental</div><div class="b-line"></div></div><div class="b-id">#TRV-20</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Normalisasi Laporan Keuangan Emiten</h6><p>Penyesuaian data laporan keuangan perusahaan terbuka untuk riset skripsi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 18 Jam</span><small class="text-muted">5 Tahun Buku</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
+<div class="col-md-6 col-lg-4 book-item scroll-animate" data-cat="Akademik"><div class="book-card"><div class="book-stage"><div class="book" style="background:linear-gradient(160deg,#3b82f6,#1d4ed8)"><div><div class="b-top">Laporan</div><div class="b-title">Skripsi Analisis Fundamental</div><div class="b-line"></div></div><div class="b-id">#TRV-20</div></div></div><span class="tool-badge">Studi Akademik</span><h6>Normalisasi Laporan Keuangan Emiten</h6><p>Penyesuaian data laporan keuangan perusahaan terbuka untuk riset skripsi.</p><div class="book-meta"><span class="badge bg-success bg-opacity-10 text-success">Waktu: 18 Jam</span><small class="text-muted">5 Tahun Buku</small></div><button class="btn-detail" data-bs-toggle="modal" data-bs-target="#modal-TRV-02">Lihat Detail</button></div></div>
 
 </div>
 </div></section>
 </div>
 
-<!-- MENU 4: TESTIMONI (ISI KONTEN TETAP SEPERTI AWAL SEBAGAI MENU NAVBAR) -->
+<!-- MENU 4: TESTIMONI -->
 <div id="page-testimoni" class="page-section">
 <section class="py-5"><div class="container">
-<div class="text-center mb-5"><h2 class="fw-bold">Testimoni Klien</h2><p class="text-muted small mx-auto" style="max-width:560px">Tanggapan dari klien yang telah menggunakan jasa pemeriksaan dan perapihan laporan TruVal.</p></div>
+<div class="text-center mb-5 scroll-animate"><h2 class="fw-bold">Testimoni Klien</h2><p class="text-muted small mx-auto" style="max-width:560px">Tanggapan dari klien yang telah menggunakan jasa pemeriksaan dan perapihan laporan TruVal.</p></div>
 <div class="row g-3">
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">RF</div><div><h6 class="fw-bold mb-0 text-dark small">R. Firmansyah, S.E.</h6><span class="text-muted" style="font-size:.75rem">Finance Supervisor</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 hari lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Sangat membantu untuk perapihan Laporan Keuangan Tahunan. Korelasi angka antara Laba Rugi dan Neraca diperiksa sangat teliti sampai ketemu titik selisihnya."</p></div></div>
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">NP</div><div><h6 class="fw-bold mb-0 text-dark small">Nadia Putri</h6><span class="text-muted" style="font-size:.75rem">Penyusun Laporan Akademik</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Format tabel dan penulisan Catatan atas Laporan Keuangan (CaLK) langsung rapi. Respon pengerjaan juga cepat banget dari target deadline!"</p></div></div>
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">AH</div><div><h6 class="fw-bold mb-0 text-dark small">Ahmad Hidayat</h6><span class="text-muted" style="font-size:.75rem">Owner UMKM Kuliner</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Awalnya pusing neraca usaha selalu gak balance. Setelah direview TruVal, semua formula dihubungkan otomatis di Excel. Recommended!"</p></div></div>
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">DS</div><div><h6 class="fw-bold mb-0 text-dark small">Dewi Sartika</h6><span class="text-muted" style="font-size:.75rem">Bendahara Koperasi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">3 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Selisih simpanan anggota yang sudah lama kami cari akhirnya ketemu. Laporan jadi jelas sebelum rapat anggota tahunan."</p></div></div>
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">BK</div><div><h6 class="fw-bold mb-0 text-dark small">Bima Kusuma</h6><span class="text-muted" style="font-size:.75rem">Mahasiswa Akuntansi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Rasio keuangan di tugas akhir saya ternyata salah rujuk sel. Setelah dibenahi, tabelnya rapi dan mudah dipahami."</p></div></div>
-<div class="col-md-6 col-lg-4"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><div class="avatar-circle">SW</div><div><h6 class="fw-bold mb-0 text-dark small">Sinta Wulandari</h6><span class="text-muted" style="font-size:.75rem">Pemilik Toko Kelontong</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Laba rugi bulanan sekarang konsisten dan HPP-nya jelas. Saya bisa lihat margin tiap bulan tanpa menghitung ulang."</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="R. Firmansyah" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">R. Firmansyah, S.E.</h6><span class="text-muted" style="font-size:.75rem">Finance Supervisor</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 hari lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Sangat membantu untuk perapihan Laporan Keuangan Tahunan. Korelasi angka antara Laba Rugi dan Neraca diperiksa sangat teliti sampai ketemu titik selisihnya."</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Nadia Putri" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Nadia Putri</h6><span class="text-muted" style="font-size:.75rem">Penyusun Laporan Akademik</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Format tabel dan penulisan Catatan atas Laporan Keuangan (CaLK) langsung rapi. Respon pengerjaan juga cepat banget dari target deadline!"</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Ahmad Hidayat" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Ahmad Hidayat</h6><span class="text-muted" style="font-size:.75rem">Owner UMKM Kuliner</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Awalnya pusing neraca usaha selalu gak balance. Setelah direview TruVal, semua formula dihubungkan otomatis di Excel. Recommended!"</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Dewi Sartika" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Dewi Sartika</h6><span class="text-muted" style="font-size:.75rem">Bendahara Koperasi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">3 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Selisih simpanan anggota yang sudah lama kami cari akhirnya ketemu. Laporan jadi jelas sebelum rapat anggota tahunan."</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Bima Kusuma" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Bima Kusuma</h6><span class="text-muted" style="font-size:.75rem">Mahasiswa Akuntansi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Rasio keuangan di tugas akhir saya ternyata salah rujuk sel. Setelah dibenahi, tabelnya rapi dan mudah dipahami."</p></div></div>
+<div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Sinta Wulandari" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Sinta Wulandari</h6><span class="text-muted" style="font-size:.75rem">Pemilik Toko Kelontong</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Laba rugi bulanan sekarang konsisten dan HPP-nya jelas. Saya bisa lihat margin tiap bulan tanpa menghitung ulang."</p></div></div>
 </div>
 </div></section>
 </div>
 
-<!-- MODAL CONTOH DETAIL PORTOFOLIO DENGAN TOMBOL FILE PERBAIKAN -->
+<!-- MODAL CONTOH DETAIL PORTOFOLIO -->
 <div class="modal fade" id="modal-TRV-01" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-01</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
 <div class="modal-body p-4">
@@ -325,89 +546,19 @@ footer a:hover{color:var(--truval-accent)}
 </div>
 </div></div></div></div>
 
-<div class="modal fade" id="modal-TRV-02" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-02</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
-<div class="modal-body p-4">
-<h6 class="fw-bold text-success mb-2">Standarisasi Format & Penyusunan CaLK</h6>
-<p class="text-muted small">Tabel laporan keuangan mentah dari klien disusun ulang agar memenuhi standar visual akuntansi, dilengkapi dengan 12 poin Catatan atas Laporan Keuangan (CaLK) komprehensif.</p>
-<div class="p-3 bg-light rounded-3 mt-3"><strong class="small d-block mb-1">Hasil Akhir:</strong><span class="small text-success fw-semibold"><i class="bi bi-check-circle me-1"></i> 15 lembar laporan berformat baku dan profesional.</span></div>
-<div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
-  <span class="small text-muted">Contoh Laporan Setelah Diperbaiki:</span>
-  <a href="https://docs.google.com/spreadsheets/d/contoh-link-file-perbaikan-02" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
-    <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Lihat File Perbaikan
-  </a>
-</div>
-</div></div></div></div>
-
-<div class="modal fade" id="modal-TRV-03" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-03</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
-<div class="modal-body p-4">
-<h6 class="fw-bold text-success mb-2">Rekonsiliasi Arus Kas Metode Langsung & Tidak Langsung</h6>
-<p class="text-muted small">Penyusunan ulang laporan arus kas perusahaan jasa berdasarkan data Jurnal Umum dan buku kas bank sehingga sinkron dengan saldo akhir Neraca.</p>
-<div class="p-3 bg-light rounded-3 mt-3"><strong class="small d-block mb-1">Hasil Akhir:</strong><span class="small text-success fw-semibold"><i class="bi bi-check-circle me-1"></i> Saldo kas akhir sinkron dengan rekening koran.</span></div>
-<div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
-  <span class="small text-muted">Contoh Laporan Setelah Diperbaiki:</span>
-  <a href="https://docs.google.com/spreadsheets/d/contoh-link-file-perbaikan-03" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
-    <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Lihat File Perbaikan
-  </a>
-</div>
-</div></div></div></div>
-
-<div class="modal fade" id="modal-TRV-04" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-04</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
-<div class="modal-body p-4">
-<h6 class="fw-bold text-success mb-2">Laba Rugi Bulanan & Perhitungan HPP UMKM Kuliner</h6>
-<p class="text-muted small">Memperbaiki perhitungan Harga Pokok Penjualan (HPP) berdasarkan stok opname persediaan bahan baku dan menyusun laporan laba rugi konsisten selama 12 bulan.</p>
-<div class="p-3 bg-light rounded-3 mt-3"><strong class="small d-block mb-1">Hasil Akhir:</strong><span class="small text-success fw-semibold"><i class="bi bi-check-circle me-1"></i> Margin keuntungan tiap bulan terpantau akurat.</span></div>
-<div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
-  <span class="small text-muted">Contoh Laporan Setelah Diperbaiki:</span>
-  <a href="https://docs.google.com/spreadsheets/d/contoh-link-file-perbaikan-04" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
-    <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Lihat File Perbaikan
-  </a>
-</div>
-</div></div></div></div>
-
-<div class="modal fade" id="modal-TRV-05" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-05</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
-<div class="modal-body p-4">
-<h6 class="fw-bold text-success mb-2">Analisis Rasio Keuangan Tugas Akhir</h6>
-<p class="text-muted small">Koreksi rumus rasio likuiditas, solvabilitas, dan profitabilitas pada spreadsheet tugas akhir mahasiswa sehingga referensi sel data tepat dan akurat.</p>
-<div class="p-3 bg-light rounded-3 mt-3"><strong class="small d-block mb-1">Hasil Akhir:</strong><span class="small text-success fw-semibold"><i class="bi bi-check-circle me-1"></i> Tabel rasio siap dilampirkan dalam skripsi.</span></div>
-<div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
-  <span class="small text-muted">Contoh Laporan Setelah Diperbaiki:</span>
-  <a href="https://docs.google.com/spreadsheets/d/contoh-link-file-perbaikan-05" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
-    <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Lihat File Perbaikan
-  </a>
-</div>
-</div></div></div></div>
-
-<div class="modal fade" id="modal-TRV-06" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title fw-bold">Detail Studi Kasus Portofolio #TRV-06</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
-<div class="modal-body p-4">
-<h6 class="fw-bold text-success mb-2">Laporan Keuangan Koperasi Simpan Pinjam</h6>
-<p class="text-muted small">Pencocokan buku pembantu simpanan anggota dengan akun buku besar Neraca untuk memastikan kevalidan perhitungan Sisa Hasil Usaha (SHU).</p>
-<div class="p-3 bg-light rounded-3 mt-3"><strong class="small d-block mb-1">Hasil Akhir:</strong><span class="small text-success fw-semibold"><i class="bi bi-check-circle me-1"></i> Data simpanan klir dan SHU terdistribusi adil.</span></div>
-<div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
-  <span class="small text-muted">Contoh Laporan Setelah Diperbaiki:</span>
-  <a href="https://docs.google.com/spreadsheets/d/contoh-link-file-perbaikan-06" target="_blank" class="btn btn-sm btn-outline-success fw-semibold">
-    <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Lihat File Perbaikan
-  </a>
-</div>
-</div></div></div></div>
-
 <!-- FOOTER -->
 <footer><div class="container">
 <div class="row g-4 mb-4">
 <div class="col-lg-4"><h5 class="fw-bold text-white mb-3">TruVal<span>.</span></h5><p class="small">Layanan profesional pemeriksaan, perapihan, dan verifikasi korelasi angka laporan keuangan terstruktur.</p></div>
 <div class="col-lg-3 col-6"><h6 class="fw-bold text-white mb-3">Navigasi</h6><ul class="list-unstyled small mb-0">
 <li class="mb-2"><a onclick="switchTab('beranda')">Beranda</a></li>
-<li class="mb-2"><a onclick="switchTab('tentang')">Layanan Kami</a></li>
+<li class="mb-2"><a onclick="switchTab('tentang')">Layanan & Harga</a></li>
 <li class="mb-2"><a onclick="switchTab('portofolio')">Portofolio</a></li>
 <li class="mb-2"><a onclick="switchTab('testimoni')">Testimoni</a></li></ul></div>
 <div class="col-lg-5 col-6"><h6 class="fw-bold text-white mb-3">Hubungi Kami</h6><p class="small mb-3">Konsultasi online gratis siap membantu pemeriksaan dokumen keuangan Anda.</p>
 <div class="d-flex">
 <a href="https://tiktok.com/truval.id" target="_blank" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-<a href="https://instagram.com/truval.id" target="_blank" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+<a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
 <a href="https://wa.link/mvzz7l" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
 <a href="mailto:info@truvalfinance.com" class="social-icon" aria-label="Email"><i class="bi bi-envelope-fill"></i></a></div></div>
 </div>
@@ -427,6 +578,8 @@ function switchTab(tabName){
   window.scrollTo({top:0,behavior:'smooth'});
   const nc=document.getElementById('navbarNav');
   if(nc.classList.contains('show')){new bootstrap.Collapse(nc,{toggle:false}).hide();}
+  
+  setTimeout(checkScroll, 100);
 }
 
 // Filter Portofolio
@@ -440,6 +593,22 @@ document.querySelectorAll('.chip').forEach(function(c){
     });
   });
 });
+
+// Scroll Animation Observer
+function checkScroll() {
+  const elements = document.querySelectorAll('.scroll-animate');
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight * 0.85) {
+      el.classList.add('visible');
+    }
+  });
+}
+
+window.addEventListener('scroll', checkScroll);
+window.addEventListener('load', checkScroll);
+setTimeout(checkScroll, 200);
 </script>
 </body>
 </html>
