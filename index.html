@@ -103,6 +103,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .price, .modal-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
 }
 .btn-accent::after {
   content: '';
@@ -136,12 +138,63 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .price, .modal-title {
   border-radius: 10px;
   padding: 12px 26px;
   transition: all .2s;
+  text-decoration: none;
+  display: inline-block;
 }
 .btn-outline-custom:hover {
   background: var(--truval-tosca-light);
   border-color: var(--truval-tosca);
   color: var(--truval-navy);
   transform: translateY(-2px);
+}
+/* ===== CSS KHUSUS GALLERY REVIEW SCREENSHOT CHAT (10 KARTU) ===== */
+.review-screenshot-card {
+  background: #ffffff;
+  border: 1px solid var(--truval-border);
+  border-radius: 16px;
+  padding: 14px;
+  height: 100%;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.review-screenshot-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(10, 25, 47, 0.1);
+  border-color: var(--truval-tosca);
+}
+.review-img-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--truval-bg-light);
+  border: 1px solid var(--truval-border);
+  cursor: pointer;
+}
+.review-screenshot-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.review-img-wrapper:hover .review-screenshot-img {
+  transform: scale(1.05);
+}
+.review-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 47, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.review-img-wrapper:hover .review-img-overlay {
+  opacity: 1;
 }
 
 /* ===== HERO SECTION (ALA NOTION INTERAKTIF) ===== */
@@ -474,7 +527,7 @@ footer a:hover { color: var(--truval-tosca); }
           
           <div class="d-flex justify-content-center gap-3 mb-5">
             <button onclick="switchTab('tentang')" class="btn btn-accent">Lihat Paket & Layanan</button>
-            <a href="https://wa.link/mvzz7l?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan" target="_blank" class="btn btn-outline-custom">Konsultasi Gratis</a>
+            <a href="https://wa.me/6285600030264?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan.%0A%0ANama:%20%0AJenis%20Usaha/Akademik:%20%0AKendala%20Laporan:%20" target="_blank" class="btn btn-outline-custom">Konsultasi Gratis</a>
           </div>
 
           <!-- GAMBAR PRATINJAU HERO -->
@@ -532,7 +585,7 @@ footer a:hover { color: var(--truval-tosca); }
             <span class="badge bg-light text-dark border mb-2 px-3 py-1 font-monospace">Segera Hadir di Genggaman Anda</span>
             <h3 class="fw-bold mb-3" style="color: var(--truval-navy);">Aplikasi Mobile TruVal</h3>
             <p class="text-muted mb-4" style="line-height: 1.7;">Pantau progres perbaikan laporan keuangan, lakukan konsultasi kilat, dan unduh hasil audit langsung dari ponsel pintar Anda. Pengalaman manajemen finansial yang lebih praktis, cepat, dan transparan.</p>
-            <a href="https://wa.link/mvzz7l?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan" target="_blank" class="btn btn-accent btn-lg shadow-sm">
+            <a href="https://wa.me/6285600030264?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan.%0A%0ANama:%20%0AJenis%20Usaha/Akademik:%20%0AKendala%20Laporan:%20" target="_blank" class="btn btn-accent btn-lg shadow-sm">
               <i class="bi bi-whatsapp me-2"></i> Hubungi Layanan via WhatsApp
             </a>
           </div>
@@ -817,22 +870,189 @@ footer a:hover { color: var(--truval-tosca); }
   </div></section>
 </div>
 
-<!-- MENU 4: TESTIMONI -->
+<!-- MENU 4: TESTIMONI (10 KARTU BUKTI CHAT BERATURAN) -->
 <div id="page-testimoni" class="page-section">
-  <section class="py-5 bg-white"><div class="container">
-  <div class="text-center mb-5 scroll-animate"><h2 class="fw-bold" style="color: var(--truval-navy);">Testimoni Klien</h2><p class="text-muted small mx-auto" style="max-width:560px">Tanggapan dari klien yang telah menggunakan jasa pemeriksaan dan perapihan laporan TruVal.</p></div>
-  <div class="row g-3">
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="R. Firmansyah" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">R. Firmansyah, S.E.</h6><span class="text-muted" style="font-size:.75rem">Finance Supervisor</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 hari lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Sangat membantu untuk perapihan Laporan Keuangan Tahunan. Korelasi angka antara Laba Rugi dan Neraca diperiksa sangat teliti sampai ketemu titik selisihnya."</p></div></div>
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Nadia Putri" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Nadia Putri</h6><span class="text-muted" style="font-size:.75rem">Penyusun Laporan Akademik</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Format tabel dan penulisan Catatan atas Laporan Keuangan (CaLK) langsung rapi. Respon pengerjaan juga cepat banget dari target deadline!"</p></div></div>
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Ahmad Hidayat" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Ahmad Hidayat</h6><span class="text-muted" style="font-size:.75rem">Owner UMKM Kuliner</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">2 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Awalnya pusing neraca usaha selalu gak balance. Setelah direview TruVal, semua formula dihubungkan otomatis di Excel. Recommended!"</p></div></div>
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Dewi Sartika" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Dewi Sartika</h6><span class="text-muted" style="font-size:.75rem">Bendahara Koperasi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">3 minggu lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Selisih simpanan anggota yang sudah lama kami cari akhirnya ketemu. Laporan jadi jelas sebelum rapat anggota tahunan."</p></div></div>
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Bima Kusuma" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Bima Kusuma</h6><span class="text-muted" style="font-size:.75rem">Mahasiswa Akuntansi</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Rasio keuangan di tugas akhir saya ternyata salah rujuk sel. Setelah dibenahi, tabelnya rapi dan mudah dipahami."</p></div></div>
-  <div class="col-md-6 col-lg-4 scroll-animate"><div class="review-card"><div class="d-flex align-items-center justify-content-between mb-3"><div class="d-flex align-items-center gap-3"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Sinta Wulandari" class="review-avatar"><div><h6 class="fw-bold mb-0 text-dark small">Sinta Wulandari</h6><span class="text-muted" style="font-size:.75rem">Pemilik Toko Kelontong</span></div></div><span class="text-muted font-monospace" style="font-size:.7rem">1 bulan lalu</span></div><div class="star-rating mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p class="text-secondary small mb-0" style="line-height:1.5">"Laba rugi bulanan sekarang konsisten dan HPP-nya jelas. Saya bisa lihat margin tiap bulan tanpa menghitung ulang."</p></div></div>
-  </div>
-  </div></section>
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-5 scroll-animate">
+        <span class="badge bg-light text-dark border mb-2 px-3 py-1 font-monospace">Bukti Layanan Nyata</span>
+        <h2 class="fw-bold" style="color: var(--truval-navy);">💬 Consultation Review</h2>
+        <p class="text-muted small mx-auto" style="max-width:580px">Tangkapan layar kepuasan, ulasan, dan hasil diskusi nyata bersama klien TruVal.</p>
+      </div>
+
+      <!-- Grid 10 Kartu Testimoni -->
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Review 1 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/1e293b/ffffff?text=Bukti+Chat+1', 'Rekonsiliasi Neraca Balance - UD Sumber Rejeki')">
+              <img src="https://placehold.co/600x900/1e293b/ffffff?text=Bukti+Chat+1" alt="Bukti Chat Review 1" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-success bg-opacity-10 text-success mb-1">UMKM / Retail</span>
+              <h6 class="fw-bold text-dark mb-1">UD Sumber Rejeki</h6>
+              <p class="text-muted small mb-0">"Puji Tuhan kak, selisih 18 juta langsung ketemu setelah dibantu telusuri buku besar."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/0d9488/ffffff?text=Bukti+Chat+2', 'Perapihan Format CaLK - PT Karya Mandiri')">
+              <img src="https://placehold.co/600x900/0d9488/ffffff?text=Bukti+Chat+2" alt="Bukti Chat Review 2" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-info bg-opacity-10 text-info mb-1">Studi Akademik</span>
+              <h6 class="fw-bold text-dark mb-1">PT Karya Mandiri</h6>
+              <p class="text-muted small mb-0">"Format CaLK dan rumus Excel langsung rapi, dosen pembimbing gak banyak revisi lagi."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/0a192f/ffffff?text=Bukti+Chat+3', 'Pencatatan Arus Kas - CV Jasa Nusantara')">
+              <img src="https://placehold.co/600x900/0a192f/ffffff?text=Bukti+Chat+3" alt="Bukti Chat Review 3" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-primary bg-opacity-10 text-primary mb-1">Perusahaan Jasa</span>
+              <h6 class="fw-bold text-dark mb-1">CV Jasa Nusantara</h6>
+              <p class="text-muted small mb-0">"Laporan arus kas metode langsungnya teliti banget, sangat membantu akuntan internal."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/14b8a6/ffffff?text=Bukti+Chat+4', 'Hitung HPP Kuliner - Warung Bu Rini')">
+              <img src="https://placehold.co/600x900/14b8a6/ffffff?text=Bukti+Chat+4" alt="Bukti Chat Review 4" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-success bg-opacity-10 text-success mb-1">UMKM Kuliner</span>
+              <h6 class="fw-bold text-dark mb-1">Warung Bu Rini</h6>
+              <p class="text-muted small mb-0">"HPP usaha kuliner saya sekarang jelas, margin tiap bulan jadi ketahuan dengan pasti."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/334155/ffffff?text=Bukti+Chat+5', 'Koreksi Rasio - Tugas Akhir S1')">
+              <img src="https://placehold.co/600x900/334155/ffffff?text=Bukti+Chat+5" alt="Bukti Chat Review 5" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-info bg-opacity-10 text-info mb-1">Studi Akademik</span>
+              <h6 class="fw-bold text-dark mb-1">Tugas Akhir Akuntansi</h6>
+              <p class="text-muted small mb-0">"Ternyata ada salah rujuk sel di rasio likuiditas. Makasih udah dibantu benahi mas!"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/0f766e/ffffff?text=Bukti+Chat+6', 'Simpan Pinjam RAT - Kospin Sejahtera')">
+              <img src="https://placehold.co/600x900/0f766e/ffffff?text=Bukti+Chat+6" alt="Bukti Chat Review 6" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-warning bg-opacity-10 text-warning mb-1">Koperasi</span>
+              <h6 class="fw-bold text-dark mb-1">Kospin Sejahtera</h6>
+              <p class="text-muted small mb-0">"Pengerjaan cepat sebelum batas waktu RAT. Laporan simpan pinjam anggota transparan."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 7 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/1e1b4b/ffffff?text=Bukti+Chat+7', 'Audit Stok - Toko Elektronik Jaya')">
+              <img src="https://placehold.co/600x900/1e1b4b/ffffff?text=Bukti+Chat+7" alt="Bukti Chat Review 7" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-success bg-opacity-10 text-success mb-1">Retail</span>
+              <h6 class="fw-bold text-dark mb-1">Toko Elektronik Jaya</h6>
+              <p class="text-muted small mb-0">"Catatan piutang dan pencatatan stok barangnya rapi banget. Sangat recommended!"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 8 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/0284c7/ffffff?text=Bukti+Chat+8', 'Pendapatan Proyek - CV Media Kreatif')">
+              <img src="https://placehold.co/600x900/0284c7/ffffff?text=Bukti+Chat+8" alt="Bukti Chat Review 8" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-primary bg-opacity-10 text-primary mb-1">Perusahaan Jasa</span>
+              <h6 class="fw-bold text-dark mb-1">CV Media Kreatif</h6>
+              <p class="text-muted small mb-0">"Konsultasi gratisnya ramah dan mencerahkan. Rekonsiliasi termin proyeknya beres."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 9 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/4c1d95/ffffff?text=Bukti+Chat+9', 'BOP Akuntansi Biaya - Makalah Kampus')">
+              <img src="https://placehold.co/600x900/4c1d95/ffffff?text=Bukti+Chat+9" alt="Bukti Chat Review 9" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-info bg-opacity-10 text-info mb-1">Studi Akademik</span>
+              <h6 class="fw-bold text-dark mb-1">Makalah Akuntansi Biaya</h6>
+              <p class="text-muted small mb-0">"Alokasi BOP makalah kelompok kami langsung bener, pengerjaannya cuma beberapa jam!"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 10 -->
+        <div class="col-sm-6 col-lg-4 col-xl-3 scroll-animate">
+          <div class="review-screenshot-card">
+            <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/065f46/ffffff?text=Bukti+Chat+10', 'Kas Harian - Bakery Manis Legit')">
+              <img src="https://placehold.co/600x900/065f46/ffffff?text=Bukti+Chat+10" alt="Bukti Chat Review 10" class="review-screenshot-img">
+              <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+            </div>
+            <div class="mt-auto">
+              <span class="badge bg-success bg-opacity-10 text-success mb-1">UMKM Kuliner</span>
+              <h6 class="fw-bold text-dark mb-1">Bakery Manis Legit</h6>
+              <p class="text-muted small mb-0">"Pencatatan kas harian toko roti sekarang gampang diisi dan rapi di spreadsheet."</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </div>
 
-<!-- MODAL PORTOFOLIO DYNAAMIS -->
+<!-- MODAL ZOOM IMAGES BUKTI CHAT -->
+<div class="modal fade" id="zoomChatModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title fw-bold" id="zoomChatTitle">Bukti Tangkapan Layar Chat</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body text-center p-3">
+        <img id="zoomChatImgSrc" src="" alt="Zoom Screenshot" class="img-fluid rounded-3 border" style="max-height: 75vh; width: auto;">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL PORTOFOLIO DYNAMIS -->
 <div class="modal fade" id="portfolioModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -858,7 +1078,7 @@ footer a:hover { color: var(--truval-tosca); }
   </div>
 </div>
 
-<!-- MODAL PEMESANAN PAKET INTERAKTIF -->
+<!-- MODAL PEMESANAN PAKET INTERAKTIF DENGAN TEMPLATE PESAN WA -->
 <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -870,7 +1090,7 @@ footer a:hover { color: var(--truval-tosca); }
         <div class="why-icon mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem;"><i class="bi bi-cart-check"></i></div>
         <h5 class="fw-bold" id="orderPaketName" style="color: var(--truval-navy);">Paket A</h5>
         <div class="price my-2" id="orderPaketPrice">Rp 35.000</div>
-        <p class="text-muted small mb-4">Anda akan dihubungkan langsung dengan tim konsultan TruVal via WhatsApp untuk penanganan cepat.</p>
+        <p class="text-muted small mb-4">Aplikasi akan membuka WhatsApp dengan format pemesanan yang sudah siap terisi. Anda tinggal melengkapi nama & detail dokumen.</p>
         <a id="btnConfirmWa" href="#" target="_blank" class="btn btn-accent w-100 py-2"><i class="bi bi-whatsapp me-2"></i>Lanjutkan ke WhatsApp</a>
       </div>
     </div>
@@ -890,14 +1110,14 @@ footer a:hover { color: var(--truval-tosca); }
 <div class="d-flex">
 <a href="https://www.tiktok.com/@truval.id?_r=1&_t=ZS-9AjYHNof9B1" target="_blank" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
 <a href="https://www.instagram.com/truval.id?cplk=MWtoMzBtdW14bDF4Zg==" target="_blank" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-<a href="https://wa.link/mvzz7l" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<a href="https://wa.me/6285600030264?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan.%0A%0ANama:%20%0AJenis%20Usaha/Akademik:%20%0AKendala%20Laporan:%20" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
 <a href="mailto:info@truvalfinance.com" class="social-icon" aria-label="Email"><i class="bi bi-envelope-fill"></i></a></div></div>
 </div>
 <div class="border-top border-secondary border-opacity-25 pt-3 text-center small"><p class="mb-0">&copy; 2026 TruVal Finance Services. All rights reserved.</p></div>
 </div></footer>
 
-<!-- Tombol Melayang WA -->
-<a href="https://wa.link/mvzz7l" id="floatWaBtn" class="float-wa" target="_blank" aria-label="Hubungi WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<!-- Tombol Melayang WA dengan Format Pesan Otomatis ke Nomor 085600030264 -->
+<a href="https://wa.me/6285600030264?text=Halo%20TruVal,%20saya%20ingin%20konsultasi%20mengenai%20laporan%20keuangan.%0A%0ANama:%20%0AJenis%20Usaha/Akademik:%20%0AKendala%20Laporan:%20" id="floatWaBtn" class="float-wa" target="_blank" aria-label="Hubungi WhatsApp"><i class="bi bi-whatsapp"></i></a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -935,16 +1155,26 @@ function openPortfolioModal(id, client, subtitle, desc) {
   myModal.show();
 }
 
-// Modal Pemesanan Paket Handler
+// Modal Pemesanan Paket Handler dengan Format Pesan Terstruktur ke Nomor 085600030264
 function orderPaket(namaPaket, harga) {
   document.getElementById('orderPaketName').innerText = namaPaket;
   document.getElementById('orderPaketPrice').innerText = "Rp " + harga;
-  var waUrl = "https://wa.link/mvzz7l?text=Halo%20TruVal,%20saya%20tertarik%20menggunakan%20" + encodeURIComponent(namaPaket);
+  
+  // Format Pesan Otomatis WhatsApp ke 085600030264
+  var textTemplate = "Halo TruVal, saya berminat memesan " + namaPaket + " (Rp " + harga + ").\n\nNama: \nJenis Laporan: \nTarget Deadline: \nCatatan Tambahan: ";
+  var waUrl = "https://wa.me/6285600030264?text=" + encodeURIComponent(textTemplate);
+  
   document.getElementById('btnConfirmWa').setAttribute('href', waUrl);
   var orderMdl = new bootstrap.Modal(document.getElementById('orderModal'));
   orderMdl.show();
 }
-
+// Function untuk Memperbesar Gambar Bukti Chat
+function zoomChatImg(imgUrl, title) {
+  document.getElementById('zoomChatImgSrc').setAttribute('src', imgUrl);
+  document.getElementById('zoomChatTitle').innerText = title;
+  var zoomModal = new bootstrap.Modal(document.getElementById('zoomChatModal'));
+  zoomModal.show();
+}
 // Interaksi Pill Highlight Hero
 const pill = document.getElementById('interactivePill');
 if(pill) {
@@ -973,7 +1203,7 @@ document.querySelectorAll('.book-card').forEach(card => {
     
     const book = card.querySelector('.book');
     if(book) {
-      book.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      book.style.transform = `rotateX(rotateXdeg)rotateY({rotateY}deg) scale(1.05)`;
     }
   });
 
