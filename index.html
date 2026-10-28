@@ -189,6 +189,95 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .price, .modal-title {
 .review-img-wrapper:hover .review-img-overlay {
   opacity: 1;
 }
+
+/* ===== CSS ARTIKEL / TIPS HOMEPAGE ===== */
+.article-card {
+  background: #ffffff;
+  border: 1px solid var(--truval-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.article-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(10, 25, 47, 0.1);
+  border-color: var(--truval-tosca);
+}
+.article-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background-color: var(--truval-bg-light);
+}
+.article-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.article-card:hover .article-img {
+  transform: scale(1.05);
+}
+.article-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.article-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+.badge-tips {
+  background: var(--truval-tosca-light);
+  color: var(--truval-tosca-dark);
+  border: 1px solid var(--truval-tosca);
+}
+.badge-academic {
+  background: #E0E7FF;
+  color: #4338CA;
+  border: 1px solid #C7D2FE;
+}
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--truval-navy);
+  line-height: 1.4;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.article-card:hover .article-title {
+  color: var(--truval-tosca-dark);
+}
+.article-snippet {
+  font-size: 0.85rem;
+  color: var(--truval-text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.article-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--truval-text-muted);
+  border-top: 1px solid var(--truval-border);
+  padding-top: 12px;
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
   background-color: #ffffff;
@@ -606,6 +695,54 @@ footer a:hover { color: var(--truval-tosca); }
     </div>
   </section>
 
+  <!-- BAGIAN ARTIKEL & TIPS KEUANGAN (Dapat Dibaca Penuh Tanpa Tombol WA) -->
+  <section class="py-5 bg-light border-bottom">
+    <div class="container">
+      <div class="text-center mb-5 scroll-animate">
+        <span class="badge bg-light text-dark border mb-2 px-3 py-1 font-monospace">Wawasan & Edukasi</span>
+        <h2 class="fw-bold" style="color: var(--truval-navy);">Artikel & Tips Keuangan</h2>
+        <p class="text-muted mx-auto" style="max-width:580px">Panduan praktis seputar audit laporan, trik mengatasi neraca selisih, dan penyusunan tugas akhir.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <!-- Artikel 1 -->
+        <div class="col-md-6 scroll-animate">
+          <div class="article-card" onclick="openArticleModal('Kenapa Neraca Laporan Keuangan Sering “Unbalanced”?', 'Tips Audit', '2 Min Baca', 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80', 'Ketidakseimbangan (unbalanced) pada neraca keuangan sering kali disebabkan oleh beberapa faktor tersembunyi yang terlewat saat proses pencatatan jurnal harian. Faktor utama meliputi:\n\n1. **Selisih Akun Kas & Bank:** Kesalahan pencatatan nominal mutasi kas masuk dan keluar tanpa rekonsiliasi bank secara berkala.\n2. **Persediaan Barang Dagangan:** Penilaian stok akhir yang tidak sesuai antara fisik gudang dengan buku besar.\n3. **Laba Ditahan & Prive:** Kesalahan transfer saldo laba bersih berjalan ke akun ekuitas atau adanya penarikan pribadi (prive) yang tidak dicatat.\n\nSolusi dan Cara Mengatasinya:\nUntuk mengembalikan keseimbangan neraca (balance 0 selisih), akuntan atau penyusun laporan perlu menelusuri kembali buku besar (general ledger) mulai dari jurnal penyesuaian, memeriksa ulang rumus penjumlahan di spreadsheet, serta memastikan setiap transaksi debit dan kredit telah dicatat dengan nilai yang akurat sesuai bukti transaksi asli.')">
+            <div class="article-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="Tips Audit" class="article-img">
+            </div>
+            <div class="article-content">
+              <span class="article-badge badge-tips">Tips Audit</span>
+              <h3 class="article-title">Kenapa Neraca Laporan Keuangan Sering "Unbalanced"?</h3>
+              <p class="article-snippet">Pahami selisih pencatatan antara akun kas, persediaan, dan laba ditahan...</p>
+              <div class="article-meta">
+                <span><i class="bi bi-clock me-1"></i> 2 Min Baca</span>
+                <span class="fw-bold" style="color: var(--truval-tosca-dark);">Baca Artikel Lengkap <i class="bi bi-arrow-right ms-1"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Artikel 2 -->
+        <div class="col-md-6 scroll-animate">
+          <div class="article-card" onclick="openArticleModal('Cara Menyusun CaLK (Catatan atas Laporan Keuangan) Siap Sidang', 'Studi Akademik', '3 Min Baca', 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80', 'Catatan atas Laporan Keuangan (CaLK) merupakan komponen vital yang wajib disajikan dalam laporan keuangan perusahaan maupun penelitian tugas akhir mahasiswa akuntansi. CaLK memberikan penjelasan naratif atau rincian dari angka yang tertera di laporan posisi keuangan, laba rugi, dan arus kas.\n\nLangkah-Langkah Penyusunan:\n1. **Gambaran Umum Perusahaan/Objek Penelitian:** Jelaskan sejarah singkat, akta pendirian, dan bidang usaha secara komprehensif.\n2. **Dasar Penyusunan Laporan:** Nyatakan kepatuhan terhadap standar akuntansi yang berlaku seperti SAK EMKM atau PSAK.\n3. **Kebijakan Akuntansi Signifikan:** Uraikan metode penyusutan aset tetap, pengakuan pendapatan, dan metode penilaian persediaan.\n4. **Penjelasan Rinci Pos-pos Laporan:** Berikan rincian angka material seperti saldo piutang usaha, rincian utang, dan komponen modal.\n\nDengan struktur CaLK yang sistematis, dokumen laporan tugas akhir atau laporan korporat Anda akan terlihat profesional dan siap diuji tanpa banyak revisi.')">
+            <div class="article-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Studi Akademik" class="article-img">
+            </div>
+            <div class="article-content">
+              <span class="article-badge badge-academic">Studi Akademik</span>
+              <h3 class="article-title">Cara Menyusun CaLK (Catatan atas Laporan Keuangan) Siap Sidang</h3>
+              <p class="article-snippet">Struktur penyusunan CaLK standarisasi akademik agar tidak banyak revisi...</p>
+              <div class="article-meta">
+                <span><i class="bi bi-clock me-1"></i> 3 Min Baca</span>
+                <span class="fw-bold" style="color: var(--truval-tosca-dark);">Baca Artikel Lengkap <i class="bi bi-arrow-right ms-1"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="py-5 bg-white">
     <div class="container">
       <div class="card-custom border py-5 scroll-animate">
@@ -827,7 +964,7 @@ footer a:hover { color: var(--truval-tosca); }
   </div></section>
 </div>
 
-<!-- MENU 3: PORTOFOLIO (GAYA ANNUAL REPORT KORPORAT BERSAMBUTAN DENGAN GAMBAR SESUAI BIDANG) -->
+<!-- MENU 3: PORTOFOLIO -->
 <div id="page-portofolio" class="page-section">
   <section class="py-5 bg-white"><div class="container">
   <div class="text-center mb-5 scroll-animate">
@@ -1100,27 +1237,27 @@ footer a:hover { color: var(--truval-tosca); }
   </div></section>
 </div>
 
-<!-- MENU 4: TESTIMONI -->
+<!-- MENU 4: TESTIMONI (Diperluas menjadi 8 Ulasan Chat) -->
 <div id="page-testimoni" class="page-section">
   <section class="py-5 bg-white">
     <div class="container">
       <div class="text-center mb-5 scroll-animate">
         <span class="badge bg-light text-dark border mb-2 px-3 py-1 font-monospace">Bukti Layanan Nyata</span>
         <h2 class="fw-bold" style="color: var(--truval-navy);">Consultation Review</h2>
-        <p class="text-muted small mx-auto" style="max-width:580px">Tangkapan layar kepuasan, ulasan, dan hasil diskusi nyata bersama klien TruVal.</p>
+        <p class="text-muted small mx-auto" style="max-width:580px">Tangkapan layar kepuasan, ulasan, dan hasil diskusi nyata bersama 8 klien TruVal.</p>
       </div>
       
       <!-- Testimoni Carousel (Bisa digeser ke kanan & kiri) -->
       <div id="testimoniCarousel" class="carousel slide scroll-animate" data-bs-ride="carousel" data-bs-interval="4500">
         <div class="carousel-inner">
           
-          <!-- Slide 1 -->
+          <!-- Slide 1 (Ulasan 1 - 3) -->
           <div class="carousel-item active">
             <div class="row g-4 justify-content-center">
               <div class="col-sm-6 col-lg-4 col-xl-3">
                 <div class="review-screenshot-card">
                   <div class="review-img-wrapper mb-3" onclick="zoomChatImg('asset/f1.jpg', 'Rekonsiliasi Neraca Balance - UD Sumber Rejeki')">
-                    <img src="asset/f1.jpg" alt="Bukti Chat Review 1" class="review-screenshot-img">
+                    <img src="asset/f1.jpeg" alt="Bukti Chat Review 1" class="review-screenshot-img">
                     <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
                   </div>
                   <div class="mt-auto">
@@ -1159,7 +1296,7 @@ footer a:hover { color: var(--truval-tosca); }
             </div>
           </div>
 
-          <!-- Slide 2 -->
+          <!-- Slide 2 (Ulasan 4 - 6) -->
           <div class="carousel-item">
             <div class="row g-4 justify-content-center">
               <div class="col-sm-6 col-lg-4 col-xl-3">
@@ -1190,14 +1327,46 @@ footer a:hover { color: var(--truval-tosca); }
               </div>
               <div class="col-sm-6 col-lg-4 col-xl-3">
                 <div class="review-screenshot-card">
-                  <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://placehold.co/600x900/0f766e/ffffff?text=Bukti+Chat+6', 'Simpan Pinjam RAT - Kospin Sejahtera')">
-                    <img src="asset/f6.jpg" alt="Bukti Chat Review 6" class="review-screenshot-img">
+                  <div class="review-img-wrapper mb-3" onclick="zoomChatImg('asset/f6.jpg', 'Simpan Pinjam RAT - Kospin Sejahtera')">
+                    <img src="asset/f6.jpeg" alt="Bukti Chat Review 6" class="review-screenshot-img">
                     <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
                   </div>
                   <div class="mt-auto">
                     <span class="badge bg-warning bg-opacity-10 text-warning mb-1">Koperasi</span>
                     <h6 class="fw-bold text-dark mb-1">Kospin Sejahtera</h6>
                     <p class="text-muted small mb-0">"Pengerjaan cepat sebelum batas waktu RAT. Laporan simpan pinjam anggota transparan."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 (Ulasan 7 & 8 - Tambahan Baru) -->
+          <div class="carousel-item">
+            <div class="row g-4 justify-content-center">
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="review-screenshot-card">
+                  <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://images.unsplash.com/photo-1556742049-0a67d553c2a5?auto=format&fit=crop&w=600&q=80', 'Audit Keuangan Toko Elektronik')">
+                    <img src="asset/f7.jpeg" alt="Bukti Chat Review 7" class="review-screenshot-img">
+                    <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+                  </div>
+                  <div class="mt-auto">
+                    <span class="badge bg-primary bg-opacity-10 text-primary mb-1">Toko Ritel</span>
+                    <h6 class="fw-bold text-dark mb-1">Sinar Jaya Elektronik</h6>
+                    <p class="text-muted small mb-0">"Stok opname dan pencatatan kas harian sekarang sinkron. Sangat recommended!"</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="review-screenshot-card">
+                  <div class="review-img-wrapper mb-3" onclick="zoomChatImg('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80', 'Penyusunan Anggaran Startup')">
+                    <img src="asset/f8.jpeg" alt="Bukti Chat Review 8" class="review-screenshot-img">
+                    <div class="review-img-overlay"><i class="bi bi-zoom-in fs-3"></i></div>
+                  </div>
+                  <div class="mt-auto">
+                    <span class="badge bg-success bg-opacity-10 text-success mb-1">Startup Bisnis</span>
+                    <h6 class="fw-bold text-dark mb-1">Inovasi Digital Nusantara</h6>
+                    <p class="text-muted small mb-0">"Proyeksi keuangan untuk pitching investor disusun rapi dan profesional sekali."</p>
                   </div>
                 </div>
               </div>
@@ -1229,6 +1398,31 @@ footer a:hover { color: var(--truval-tosca); }
       </div>
       <div class="modal-body text-center p-3">
         <img id="zoomChatImgSrc" src="" alt="Zoom Screenshot" class="img-fluid rounded-3 border" style="max-height: 75vh; width: auto;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ARTIKEL (Dapat Dibaca Penuh Tanpa Tombol WA) -->
+<div class="modal fade" id="articleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="badge badge-tips me-2" id="modalArticleCat">Tips Audit</span>
+        <h5 class="modal-title fw-bold" id="modalArticleTitle">Judul Artikel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="text-center mb-4">
+          <img id="modalArticleImg" src="" alt="Artikel Cover" class="img-fluid rounded-4 border w-100" style="max-height: 320px; object-fit: cover;">
+        </div>
+        <div class="text-muted small mb-3"><i class="bi bi-clock me-1"></i> <span id="modalArticleDuration">2 Min Baca</span></div>
+        <div id="modalArticleContent" style="line-height: 1.8; color: var(--truval-text-dark); white-space: pre-line; font-size: 0.95rem;">
+          Isi artikel lengkap...
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-custom btn-sm" data-bs-dismiss="modal">Tutup Artikel</button>
       </div>
     </div>
   </div>
@@ -1328,6 +1522,20 @@ document.querySelectorAll('.chip').forEach(function(c){
   });
 });
 
+// Modal Artikel Handler (Full Text Bacaan)
+function openArticleModal(title, category, duration, imgUrl, content) {
+  document.getElementById('modalArticleTitle').innerText = title;
+  const catBadge = document.getElementById('modalArticleCat');
+  catBadge.innerText = category;
+  catBadge.className = 'badge me-2 ' + (category === 'Tips Audit' ? 'badge-tips' : 'badge-academic');
+  document.getElementById('modalArticleDuration').innerText = duration;
+  document.getElementById('modalArticleImg').setAttribute('src', imgUrl);
+  document.getElementById('modalArticleContent').innerText = content;
+
+  var articleModal = new bootstrap.Modal(document.getElementById('articleModal'));
+  articleModal.show();
+}
+
 // Modal Portofolio Handler
 function openPortfolioModal(id, client, subtitle, desc, filePath) {
   document.getElementById('modalProjId').innerText = "Detail Studi Kasus " + id + " - " + client;
@@ -1377,30 +1585,6 @@ if(pill) {
     pill.innerHTML = states[stateIdx];
   });
 }
-
-// 3D Parallax Tilt Effect pada Buku Portofolio
-document.querySelectorAll('.book-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (centerY - y) / 15;
-    const rotateY = (x - centerX) / 15;
-    
-    const book = card.querySelector('.book');
-    if(book) {
-      book.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-    }
-  });
-  card.addEventListener('mouseleave', () => {
-    const book = card.querySelector('.book');
-    if(book) {
-      book.style.transform = `rotateX(0deg) rotateY(-12deg) scale(1)`;
-    }
-  });
-});
 
 // Scroll Animation Observer
 function checkScroll() {
